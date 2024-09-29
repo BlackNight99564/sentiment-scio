@@ -8,9 +8,12 @@ const SentimentChart = ({ data }) => {
     { name: 'Negative', value: data.filter(item => item.sentiment === 'negative').length },
   ];
 
+  const averageSentiment = data.reduce((acc, item) => acc + item.score, 0) / data.length;
+
   return (
     <div className="mb-8">
-      <h2 className="text-2xl font-semibold mb-4">Sentiment Distribution</h2>
+      <h2 className="text-2xl font-semibold mb-4">Sentiment Analysis</h2>
+      <p className="mb-4">Average Sentiment Score: {averageSentiment.toFixed(2)}</p>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />

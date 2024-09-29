@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import SentimentChart from '../components/SentimentChart';
+import TopicModelingChart from '../components/TopicModelingChart';
 import SentimentTable from '../components/SentimentTable';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
@@ -18,7 +19,7 @@ const Index = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Social Media Sentiment Analysis</h1>
+      <h1 className="text-3xl font-bold mb-6">Social Media Analytics Dashboard</h1>
       <div className="mb-6 flex">
         <Input
           type="text"
@@ -29,7 +30,10 @@ const Index = () => {
         />
         <Button onClick={() => setSearchTerm(searchTerm)}>Search</Button>
       </div>
-      <SentimentChart data={sentimentData} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <SentimentChart data={sentimentData} />
+        <TopicModelingChart data={sentimentData} />
+      </div>
       <SentimentTable data={sentimentData} />
     </div>
   );
