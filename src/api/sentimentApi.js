@@ -16,6 +16,43 @@ const generateMockData = (count) => {
 
 const mockData = generateMockData(100);
 
+const calculateMetrics = (data) => {
+  const total = data.length;
+  const correct = data.filter(item => item.actualSentiment === item.predictedSentiment).length;
+  const accuracy = (correct / total) * 100;
+
+  const confusionMatrix = {
+    'true_positive': 0,
+    'false_positive': 0,
+    'true_negative': 0,
+    'false_negative': 0
+  };
+
+  data.forEach(item => {
+    if (item.actualSentiment === 'positive' && item.predictedSentiment === 'positive') {
+      confusionMatrix.true_positive++;
+    } else if (item.actualSentiment === 'negative' && item.predictedSentiment === 'positive') {
+      confusionMatrix.false_positive++;
+    } else if (item.actualSentiment === 'negative' && item.predictedSentiment === 'negative') {
+      confusionMatrix.true_negative++;
+    } else if (item.actualSentiment === 'positive' && item.predictedSentiment === 'negative') {
+      confusionMatrix.false_negative++;
+    }
+  });
+
+  const precision = confusionMatrix.true_positive / (confusionMatrix.true_positive + confusionMatrix.false_positive);
+  const recall = confusionMatrix.true_positive / (confusionMatrix.true_positive + confusionMatrix.false_negative);
+  const f1Score = 2 * ((precision * recall) / (precision + recall));
+
+  return {
+    accuracy,
+    precision: precision * 100,
+    recall: recall * 100,
+    f1Score: f1Score * 100,
+    confusionMatrix
+  };
+};
+
 export const fetchSentimentData = (searchTerm) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -23,41 +60,22 @@ export const fetchSentimentData = (searchTerm) => {
         ? mockData.filter(item => item.text.toLowerCase().includes(searchTerm.toLowerCase()))
         : mockData;
       
-      const accuracyMetrics = calculateAccuracyMetrics(filteredData);
+      const metrics = calculateMetrics(filteredData);
       
-      resolve({ data: filteredData, metrics: accuracyMetrics });
+      resolve({ data: filteredData, metrics });
     }, 500);
   });
 };
 
-const calculateAccuracyMetrics = (data) => {
-  let correct = 0;
-  let total = data.length;
-  
-  data.forEach(item => {
-    if (item.actualSentiment === item.predictedSentiment) {
-      correct++;
-    }
+export const fetchModelComparison = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const models = ['Logistic Regression', 'Decision Tree', 'KNN'];
+      const modelComparison = models.map(model => ({
+        name: model,
+        accuracy: faker.number.float({ min: 70, max: 95, precision: 0.1 })
+      }));
+      resolve(modelComparison);
+    }, 500);
   });
-  
-  const accuracy = (correct / total) * 100;
-  const precision = calculatePrecision(data);
-  const recall = calculateRecall(data);
-  const f1Score = 2 * ((precision * recall) / (precision + recall));
-  
-  return { accuracy, precision, recall, f1Score };
-};
-
-const calculatePrecision = (data) => {
-  // Simplified precision calculation for positive sentiment
-  const truePositives = data.filter(item => item.actualSentiment === 'positive' && item.predictedSentiment === 'positive').length;
-  const falsePositives = data.filter(item => item.actualSentiment !== 'positive' && item.predictedSentiment === 'positive').length;
-  return truePositives / (truePositives + falsePositives);
-};
-
-const calculateRecall = (data) => {
-  // Simplified recall calculation for positive sentiment
-  const truePositives = data.filter(item => item.actualSentiment === 'positive' && item.predictedSentiment === 'positive').length;
-  const falseNegatives = data.filter(item => item.actualSentiment === 'positive' && item.predictedSentiment !== 'positive').length;
-  return truePositives / (truePositives + falseNegatives);
 };
