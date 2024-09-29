@@ -1,0 +1,6 @@
+username,post_content,sentiment,sentiment_score,likes,comments,shares,connections,date,company_name,industry
+user1,Excited to announce our company's expansion!,positive,0.9,500,50,100,5000,2023-03-15,TechCorp,Technology
+user2,Layoffs in the industry are concerning,negative,-0.6,100,30,20,2000,2023-03-16,FinanceHub,Finance
+user3,New study on workplace productivity,neutral,0.2,200,40,30,3000,2023-03-17,ResearchCo,Research
+user4,Just got promoted! Hard work pays off,positive,0.8,1000,200,50,10000,2023-03-18,MarketingPro,Marketing
+user5,Disappointed with the new policy changes,negative,-0.7,50,20,5,1500,2023-03-19,PolicyMakers,Government

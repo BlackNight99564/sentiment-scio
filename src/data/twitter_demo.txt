@@ -1,0 +1,6 @@
+username,tweet_content,sentiment,sentiment_score,likes,retweets,replies,followers,date,hashtags
+user1,Just launched our new app! #TechNews,positive,0.9,500,100,50,10000,2023-03-15,#TechNews #AppLaunch
+user2,Another day, another disappointment #FML,negative,-0.8,20,5,10,500,2023-03-16,#FML
+user3,Interesting poll results. What do you think?,neutral,0.1,100,30,40,5000,2023-03-17,#Poll #Opinion
+user4,We won the championship! #Champions,positive,0.95,1000,500,200,50000,2023-03-18,#Champions #Victory
+user5,Flight delayed again. Terrible service.,negative,-0.7,50,10,30,2000,2023-03-19,#BadService #Travel

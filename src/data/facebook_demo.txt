@@ -1,0 +1,6 @@
+username,post_content,sentiment,sentiment_score,likes,comments,shares,followers,date,page_category
+user1,Check out our new store!,positive,0.9,500,30,100,20000,2023-03-15,Business
+user2,Lost my phone today :(,negative,-0.7,50,20,0,500,2023-03-16,Personal
+user3,Interesting article on climate change,neutral,0.2,200,15,30,5000,2023-03-17,Community
+user4,Sale! 50% off all items!,positive,0.8,1000,100,200,50000,2023-03-18,Brand
+user5,Service was disappointing,negative,-0.8,20,5,1,100,2023-03-19,Personal

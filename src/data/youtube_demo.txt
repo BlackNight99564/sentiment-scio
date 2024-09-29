@@ -1,0 +1,6 @@
+username,video_title,sentiment,sentiment_score,likes,comments,views,subscribers,date,video_length
+user1,10 Easy Cooking Tips,positive,0.85,10000,500,100000,50000,2023-03-15,600
+user2,Why I'm Quitting YouTube,negative,-0.9,5000,1000,80000,100000,2023-03-16,900
+user3,Unboxing the Latest Gadget,neutral,0.1,2000,300,50000,20000,2023-03-17,480
+user4,Epic Prank Gone Wrong!,positive,0.7,20000,2000,500000,200000,2023-03-18,720
+user5,My Honest Product Review,negative,-0.4,1000,200,30000,10000,2023-03-19,540
