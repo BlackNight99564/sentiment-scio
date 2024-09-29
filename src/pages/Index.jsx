@@ -3,19 +3,22 @@ import { useQuery } from '@tanstack/react-query';
 import SentimentChart from '../components/SentimentChart';
 import TopicModelingChart from '../components/TopicModelingChart';
 import SentimentTable from '../components/SentimentTable';
+import PredictionAccuracyChart from '../components/PredictionAccuracyChart';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import { fetchSentimentData } from '../api/sentimentApi';
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { data: sentimentData, isLoading, error } = useQuery({
+  const { data: sentimentAnalysis, isLoading, error } = useQuery({
     queryKey: ['sentimentData', searchTerm],
     queryFn: () => fetchSentimentData(searchTerm),
   });
 
   if (isLoading) return <div className="text-center mt-8">Loading...</div>;
   if (error) return <div className="text-center mt-8 text-red-500">Error: {error.message}</div>;
+
+  const { data: sentimentData, metrics } = sentimentAnalysis;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -34,6 +37,7 @@ const Index = () => {
         <SentimentChart data={sentimentData} />
         <TopicModelingChart data={sentimentData} />
       </div>
+      <PredictionAccuracyChart metrics={metrics} />
       <SentimentTable data={sentimentData} />
     </div>
   );

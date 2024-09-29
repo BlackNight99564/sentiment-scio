@@ -11,7 +11,8 @@ const SentimentTable = ({ data }) => {
         <TableHeader>
           <TableRow>
             <TableHead>Post</TableHead>
-            <TableHead>Sentiment</TableHead>
+            <TableHead>Actual Sentiment</TableHead>
+            <TableHead>Predicted Sentiment</TableHead>
             <TableHead>Score</TableHead>
             <TableHead>Influence</TableHead>
             <TableHead>Platform</TableHead>
@@ -23,13 +24,20 @@ const SentimentTable = ({ data }) => {
             <TableRow key={item.id}>
               <TableCell>{item.text}</TableCell>
               <TableCell className={`capitalize ${
-                item.sentiment === 'positive' ? 'text-green-600' :
-                item.sentiment === 'negative' ? 'text-red-600' :
+                item.actualSentiment === 'positive' ? 'text-green-600' :
+                item.actualSentiment === 'negative' ? 'text-red-600' :
                 'text-yellow-600'
               }`}>
-                {item.sentiment}
+                {item.actualSentiment}
               </TableCell>
-              <TableCell>{item.score.toFixed(2)}</TableCell>
+              <TableCell className={`capitalize ${
+                item.predictedSentiment === 'positive' ? 'text-green-600' :
+                item.predictedSentiment === 'negative' ? 'text-red-600' :
+                'text-yellow-600'
+              }`}>
+                {item.predictedSentiment}
+              </TableCell>
+              <TableCell>{item.sentimentScore.toFixed(2)}</TableCell>
               <TableCell>{item.influenceScore}</TableCell>
               <TableCell>{item.platform}</TableCell>
               <TableCell>{new Date(item.date).toLocaleDateString()}</TableCell>
