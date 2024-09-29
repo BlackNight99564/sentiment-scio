@@ -4,6 +4,7 @@ import SentimentChart from '../components/SentimentChart';
 import TopicModelingChart from '../components/TopicModelingChart';
 import SentimentTable from '../components/SentimentTable';
 import PredictionAccuracyChart from '../components/PredictionAccuracyChart';
+import ModelComparisonChart from '../components/ModelComparisonChart';
 
 const Index = () => {
   const { data, isLoading, error } = useSentimentData();
@@ -13,6 +14,12 @@ const Index = () => {
 
   const metrics = calculateMetrics(data);
 
+  const modelComparisonData = [
+    { name: 'Model A', accuracy: 85 },
+    { name: 'Model B', accuracy: 78 },
+    { name: 'Model C', accuracy: 92 },
+  ];
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Social Media Analytics Dashboard</h1>
@@ -21,6 +28,7 @@ const Index = () => {
         <TopicModelingChart data={data} />
       </div>
       <PredictionAccuracyChart metrics={metrics} />
+      <ModelComparisonChart data={modelComparisonData} />
       <SentimentTable data={data} />
     </div>
   );

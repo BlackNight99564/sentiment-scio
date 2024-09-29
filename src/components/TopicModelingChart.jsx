@@ -5,7 +5,8 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82CA9D'
 
 const TopicModelingChart = ({ data }) => {
   const topicCounts = data.reduce((acc, item) => {
-    item.topics.forEach(topic => {
+    const topics = item.hashtags ? item.hashtags.split(' ') : [];
+    topics.forEach(topic => {
       acc[topic] = (acc[topic] || 0) + 1;
     });
     return acc;

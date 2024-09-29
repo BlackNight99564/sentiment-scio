@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';
 
 const SentimentTable = ({ data }) => {
-  const sortedData = [...data].sort((a, b) => b.influenceScore - a.influenceScore);
+  const sortedData = [...data].sort((a, b) => b.likes - a.likes);
 
   return (
     <div>
@@ -11,36 +11,28 @@ const SentimentTable = ({ data }) => {
         <TableHeader>
           <TableRow>
             <TableHead>Post</TableHead>
-            <TableHead>Actual Sentiment</TableHead>
-            <TableHead>Predicted Sentiment</TableHead>
+            <TableHead>Sentiment</TableHead>
             <TableHead>Score</TableHead>
-            <TableHead>Influence</TableHead>
+            <TableHead>Likes</TableHead>
             <TableHead>Platform</TableHead>
             <TableHead>Date</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sortedData.slice(0, 10).map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.text}</TableCell>
+          {sortedData.slice(0, 10).map((item, index) => (
+            <TableRow key={index}>
+              <TableCell>{item.post_content || item.tweet_content || item.video_title}</TableCell>
               <TableCell className={`capitalize ${
-                item.actualSentiment === 'positive' ? 'text-green-600' :
-                item.actualSentiment === 'negative' ? 'text-red-600' :
+                item.sentiment === 'positive' ? 'text-green-600' :
+                item.sentiment === 'negative' ? 'text-red-600' :
                 'text-yellow-600'
               }`}>
-                {item.actualSentiment}
+                {item.sentiment}
               </TableCell>
-              <TableCell className={`capitalize ${
-                item.predictedSentiment === 'positive' ? 'text-green-600' :
-                item.predictedSentiment === 'negative' ? 'text-red-600' :
-                'text-yellow-600'
-              }`}>
-                {item.predictedSentiment}
-              </TableCell>
-              <TableCell>{item.sentimentScore.toFixed(2)}</TableCell>
-              <TableCell>{item.influenceScore}</TableCell>
+              <TableCell>{parseFloat(item.sentiment_score).toFixed(2)}</TableCell>
+              <TableCell>{item.likes}</TableCell>
               <TableCell>{item.platform}</TableCell>
-              <TableCell>{new Date(item.date).toLocaleDateString()}</TableCell>
+              <TableCell>{item.date}</TableCell>
             </TableRow>
           ))}
         </TableBody>

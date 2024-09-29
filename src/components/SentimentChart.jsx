@@ -8,7 +8,7 @@ const SentimentChart = ({ data }) => {
     { name: 'Negative', value: data.filter(item => item.sentiment === 'negative').length },
   ];
 
-  const averageSentiment = data.reduce((acc, item) => acc + item.score, 0) / data.length;
+  const averageSentiment = data.reduce((acc, item) => acc + parseFloat(item.sentiment_score), 0) / data.length;
 
   return (
     <div className="mb-8">

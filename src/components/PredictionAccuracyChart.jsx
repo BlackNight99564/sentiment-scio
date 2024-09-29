@@ -4,9 +4,9 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 const PredictionAccuracyChart = ({ metrics }) => {
   const chartData = [
     { name: 'Accuracy', value: metrics.accuracy },
-    { name: 'Precision', value: metrics.precision * 100 },
-    { name: 'Recall', value: metrics.recall * 100 },
-    { name: 'F1 Score', value: metrics.f1Score * 100 },
+    { name: 'Precision', value: metrics.precision },
+    { name: 'Recall', value: metrics.recall },
+    { name: 'F1 Score', value: metrics.f1Score },
   ];
 
   return (
